@@ -1,6 +1,6 @@
 #ejercicio_5.py
 
-#import modulo_arbol
+import modulo_arbol
 
 from modulo_arbol import (
     nodoArbol,
@@ -17,7 +17,8 @@ from modulo_arbol import (
 )
 
 arbol = nodoArbol()
-
+arbol_heroes = modulo_arbol.nodoArbol()
+arbol_villanos = modulo_arbol.nodoArbol()
 
 heroes = nodoArbol()
 villanos = nodoArbol()
@@ -78,7 +79,19 @@ print ('la cantidad de heroes que hay en el arbol son:', contar_nodos(heroes))
 
 #E
 print('                                                           ')
+opcion = 'n'
+while(opcion == 'n'):
+    clave = input("Ingrese parte de lo que desea buscar: ")
+    buscado = arbol.busqueda_por_proximidad(arbol, clave)
+    print(buscado['info'])
+    opcion = input("Es este el personaje buscado? s/n: ")
+    if(opcion == 's'):
+        nombre_nuevo = input("Ingrese su nombre correctamente: ")
+        arbol.insertar_nodo(arbol, nombre_nuevo, buscado['datos'])
+        arbol.eliminar_nodo(arbol, buscado['info'])
 
+print("Lista actualizada: ")
+arbol.inorden(arbol)
 
 #F
 print('                                                           ')
@@ -88,7 +101,19 @@ print("Superheroes ordenados de manera descendente:")
 arbol.postorden_heroes(heroes)
 #G
 print('                                                           ')
+arbol.crear_bosque_heroes_villano(arbol, arbol_heroes, arbol_villanos)
 
+
+#PARTE I 
+print("Cantidad de nodos del arbol de heroes:", arbol.cantidad_nodos(arbol_heroes)) 
+print("Cantidad de nodos del arbol de villanos:", arbol.cantidad_nodos(arbol_villanos)) 
+
+
+#PARTE II 
+print("Listado alfabético del arbol de heroes")
+arbol.inorden(arbol_heroes)
+print("Listado alfabético del arbol de villanos")
+arbol.inorden(arbol_villanos) 
 
 
 
